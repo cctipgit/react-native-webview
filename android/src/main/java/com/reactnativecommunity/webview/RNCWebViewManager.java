@@ -1,5 +1,5 @@
 package com.reactnativecommunity.webview;
-
+import android.webkit.JsResult;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -797,6 +797,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         @Override
         public Bitmap getDefaultVideoPoster() {
           return Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+        }
+        //重写安卓浏览器系统弹窗方法
+        @Override
+        public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+          result.confirm();
+          return true;
         }
       };
       webView.setWebChromeClient(mWebChromeClient);
